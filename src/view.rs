@@ -1,5 +1,4 @@
 use qml::*;
-use lazysort::*;
 
 use super::Package;
 
@@ -12,9 +11,9 @@ pub fn show(gathered: Vec<Package>) {
     repos.dedup();
     let mut groups = gathered.iter()
         .flat_map(|p| p.meta.iter())
-        .sorted()
         .cloned()
         .collect::<Vec<_>>();
+    groups.sort();
     groups.dedup();
     let qrepos = repos.iter().map(|s| s.clone().into()).collect::<Vec<QVariant>>();
     let qgroups = groups.iter()
